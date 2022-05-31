@@ -11,7 +11,9 @@ public class Main {
                         .setShortName("Test")
                         .setFullName("Full Test")
                         .setYearOfFoundation(1993)
-                        .setMainProfile(University.StudyProfile.MEDICINE));
+                        .setMainProfile(University.StudyProfile.MEDICINE)
+                        .createUniversity()
+        );
 
         //Выводим в консоль тестового студента
         System.out.println(
@@ -20,6 +22,7 @@ public class Main {
                         .setFullName("Student Test")
                         .setCurrentCourseNumber(1)
                         .setAvgExamScore(98)
+                        .createStudent()
         );
     }
 }
