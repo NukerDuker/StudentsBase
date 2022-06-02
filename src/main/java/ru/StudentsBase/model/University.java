@@ -7,15 +7,13 @@ public class University {
     }
 
     //Добавляем Enum
+    public StudyProfile profileName;
+
     public enum StudyProfile {
-
-        MEDICINE("Медицина");
-
-        String profileName;
-
-        StudyProfile(String profileName) {
-            this.profileName = profileName;
-        }
+        MEDICINE,
+        PHYSICS,
+        LINGUISTICS,
+        MATHEMATICS;
     }
 
     //Добавляем поля класса
