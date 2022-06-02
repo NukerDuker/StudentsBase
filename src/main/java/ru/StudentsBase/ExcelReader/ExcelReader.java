@@ -29,9 +29,7 @@ public class ExcelReader {
             Iterator<Row> rowIterator = sheet.iterator();
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
-                if ((row.getCell(0).toString()).equals("id университета")) {
-                    Row next = rowIterator.next();
-                } else {
+                if (!((row.getCell(0).toString()).equals("id университета"))) {
                     studentList.add(student = new Student.StudentBuilder()
                             .setUniversityId(row.getCell(0).getStringCellValue())
                             .setFullName(row.getCell(1).getStringCellValue())
@@ -40,6 +38,7 @@ public class ExcelReader {
                             .createStudent()
                     );
                     studentList.add(student);
+                    System.out.println(student);
                 }
             }
         } catch (IOException e) {
@@ -57,9 +56,7 @@ public class ExcelReader {
             Iterator<Row> rowIterator = sheet.iterator();
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
-                if ((row.getCell(0).toString()).equals("id университета")) {
-                    Row next = rowIterator.next();
-                } else {
+                if (!((row.getCell(0).getStringCellValue()).equals("id университета"))) {
                     universityList.add(university = new University.UniversityBuilder()
                             .setId(row.getCell(0).getStringCellValue())
                             .setFullName(row.getCell(1).getStringCellValue())
@@ -69,10 +66,9 @@ public class ExcelReader {
                             .createUniversity()
                     );
                     universityList.add(university);
+                    System.out.println(university);
                 }
-
             }
-
         } catch (IOException e) {
             System.out.println("Файла нет");
             e.printStackTrace();
