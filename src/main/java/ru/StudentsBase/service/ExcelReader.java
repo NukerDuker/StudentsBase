@@ -1,4 +1,4 @@
-package ru.StudentsBase.ExcelReader;
+package ru.StudentsBase.service;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

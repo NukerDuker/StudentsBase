@@ -10,10 +10,17 @@ public class University {
     public StudyProfile profileName;
 
     public enum StudyProfile {
-        MEDICINE,
-        PHYSICS,
-        LINGUISTICS,
-        MATHEMATICS;
+
+        MEDICINE("медицина"),
+        PHYSICS("физика"),
+        LINGUISTICS("лингвистика"),
+        MATHEMATICS("математика");
+
+        StudyProfile(String profile) {
+            this.profileName = profile;
+        }
+
+        public String profileName;
     }
 
     //Добавляем поля класса
@@ -75,7 +82,7 @@ public class University {
         return this;
     }
 
-    public University setMainProfile(StudyProfile mainProfile) {
+    public University setMainProfile(University.StudyProfile mainProfile) {
         this.mainProfile = mainProfile;
         return this;
     }

@@ -1,0 +1,10 @@
+package ru.StudentsBase.enums;
+
+public enum UnivCompareEnum {
+
+    FOUNDATIONCOMPARISON,
+    FULLNAMECOMPARISON,
+    IDCOMPARISON,
+    MAINPROFILECOMPARISON,
+    SHORTNAMECOMPARISON;
+}
