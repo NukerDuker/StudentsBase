@@ -1,9 +1,10 @@
 package ru.StudentsBase.comparators.students;
 
 import org.apache.commons.lang3.StringUtils;
+import ru.StudentsBase.comparators.universities.UniversityComparator;
 import ru.StudentsBase.model.Student;
 
-public class univIdComparison implements StudentComparator {
+public class UnivIdComparison implements StudentComparator {
 
     @Override
     public int compare(String o1, String o2) {

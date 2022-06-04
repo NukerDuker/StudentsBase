@@ -2,7 +2,7 @@ package ru.StudentsBase.comparators.universities;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class idComparison implements UniversityComparator{
+public class IdComparison implements UniversityComparator{
 
     @Override
     public int compare(int o1, int o2) {
