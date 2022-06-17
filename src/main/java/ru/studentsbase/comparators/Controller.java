@@ -1,9 +1,9 @@
-package ru.StudentsBase.comparators;
-import ru.StudentsBase.comparators.students.*;
-import ru.StudentsBase.comparators.students.FullNameComparison;
-import ru.StudentsBase.comparators.universities.*;
-import ru.StudentsBase.enums.StudCompareEnum;
-import ru.StudentsBase.enums.UnivCompareEnum;
+package ru.studentsbase.comparators;
+import ru.studentsbase.comparators.students.*;
+import ru.studentsbase.comparators.students.FullNameComparison;
+import ru.studentsbase.comparators.universities.*;
+import ru.studentsbase.enums.StudCompareEnum;
+import ru.studentsbase.enums.UnivCompareEnum;
 
 
 public class Controller {
@@ -36,7 +36,7 @@ public class Controller {
             case IDCOMPARISON:
                 return new IdComparison();
             case FULLNAMECOMPARISON:
-                return new ru.StudentsBase.comparators.universities.FullNameComparison();
+                return new ru.studentsbase.comparators.universities.FullNameComparison();
             case MAINPROFILECOMPARISON:
                 return new MainProfileComparison();
             case SHORTNAMECOMPARISON:

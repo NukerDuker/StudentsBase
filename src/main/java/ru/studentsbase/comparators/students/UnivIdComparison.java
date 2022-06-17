@@ -1,8 +1,7 @@
-package ru.StudentsBase.comparators.students;
+package ru.studentsbase.comparators.students;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.StudentsBase.comparators.universities.UniversityComparator;
-import ru.StudentsBase.model.Student;
+import ru.studentsbase.model.Student;
 
 public class UnivIdComparison implements StudentComparator {
 

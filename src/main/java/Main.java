@@ -1,14 +1,11 @@
-import ru.StudentsBase.comparators.Controller;
-import ru.StudentsBase.comparators.students.FullNameComparison;
-import ru.StudentsBase.comparators.students.StudentComparator;
-import ru.StudentsBase.comparators.universities.ShortNameComparison;
-import ru.StudentsBase.comparators.universities.UniversityComparator;
-import ru.StudentsBase.enums.StudCompareEnum;
-import ru.StudentsBase.enums.UnivCompareEnum;
-import ru.StudentsBase.model.Student;
-import ru.StudentsBase.service.ExcelReader;
-import ru.StudentsBase.comparators.universities.FoundationComparison;
-import ru.StudentsBase.model.University;
+import ru.studentsbase.comparators.Controller;
+import ru.studentsbase.comparators.students.StudentComparator;
+import ru.studentsbase.comparators.universities.UniversityComparator;
+import ru.studentsbase.enums.StudCompareEnum;
+import ru.studentsbase.enums.UnivCompareEnum;
+import ru.studentsbase.model.Student;
+import ru.studentsbase.service.ExcelReader;
+import ru.studentsbase.model.University;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,25 +13,30 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
+        //Компараторы университетов
         UniversityComparator shortname = Controller.getComparator(UnivCompareEnum.SHORTNAMECOMPARISON);
         UniversityComparator found = Controller.getComparator(UnivCompareEnum.FOUNDATIONCOMPARISON);
         UniversityComparator fullName = Controller.getComparator(UnivCompareEnum.FULLNAMECOMPARISON);
         UniversityComparator id = Controller.getComparator(UnivCompareEnum.IDCOMPARISON);
         UniversityComparator mainprof = Controller.getComparator(UnivCompareEnum.MAINPROFILECOMPARISON);
 
-        StudentComparator studname = Controller.getComparator(StudCompareEnum.FULLNAMECOMPARISON);
+        //Компараторы студентов
+        StudentComparator studname = Controller.getComparator(StudCompareEnum.AVGEXSCORECOMPARISON);
 
-
+        //Сортировка полученного списка университетов
         List<University> lu = ExcelReader.readUniversities().stream()
                 .sorted((x, y) -> (shortname.compare(x.getShortName(), y.getShortName())))
                 .collect(Collectors.toList());
-        lu.stream().forEach(System.out::println);
 
-        List<Student> ls = ExcelReader.readStudents()
-                .stream()
-                .sorted((x, y) -> (studname.compare(x.getFullName(), y.getFullName())))
+
+        //Сортировка полученного списка студентов
+        List<Student> ls = ExcelReader.readStudents().stream()
+                .sorted((x, y) -> (studname.compare(x.getAvgExamScore(), y.getAvgExamScore())))
+                .peek(System.out::println)
                 .collect(Collectors.toList());
-        ls.stream().forEach(System.out::println);
+
+
+
 
 
 

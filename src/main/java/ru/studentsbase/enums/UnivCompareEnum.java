@@ -1,4 +1,4 @@
-package ru.StudentsBase.enums;
+package ru.studentsbase.enums;
 
 public enum UnivCompareEnum {
 
@@ -6,5 +6,5 @@ public enum UnivCompareEnum {
     FULLNAMECOMPARISON,
     IDCOMPARISON,
     MAINPROFILECOMPARISON,
-    SHORTNAMECOMPARISON;
+    SHORTNAMECOMPARISON
 }

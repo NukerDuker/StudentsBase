@@ -1,7 +1,6 @@
-package ru.StudentsBase.comparators.universities;
+package ru.studentsbase.comparators.universities;
 
-import org.apache.poi.ss.formula.functions.T;
-import ru.StudentsBase.model.University;
+import ru.studentsbase.model.University;
 
 import java.util.Comparator;
 

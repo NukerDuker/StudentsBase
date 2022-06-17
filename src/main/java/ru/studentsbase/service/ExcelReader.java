@@ -1,10 +1,10 @@
-package ru.StudentsBase.service;
+package ru.studentsbase.service;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import ru.StudentsBase.model.Student;
-import ru.StudentsBase.model.University;
+import ru.studentsbase.model.Student;
+import ru.studentsbase.model.University;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,15 +30,14 @@ public class ExcelReader {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 if (!((row.getCell(0).toString()).equals("id университета"))) {
-                    studentList.add(student = new Student.StudentBuilder()
+                    studentList
+                            .add(new Student.StudentBuilder()
                             .setUniversityId(row.getCell(0).getStringCellValue())
                             .setFullName(row.getCell(1).getStringCellValue())
                             .setCurrentCourseNumber((int) row.getCell(2).getNumericCellValue())
                             .setAvgExamScore((float) row.getCell(3).getNumericCellValue())
                             .createStudent()
                     );
-                    studentList.add(student);
-                    System.out.println(student);
                 }
             }
         } catch (IOException e) {
@@ -57,7 +56,8 @@ public class ExcelReader {
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 if (!((row.getCell(0).getStringCellValue()).equals("id университета"))) {
-                    universityList.add(university = new University.UniversityBuilder()
+                    universityList
+                            .add(new University.UniversityBuilder()
                             .setId(row.getCell(0).getStringCellValue())
                             .setFullName(row.getCell(1).getStringCellValue())
                             .setShortName(row.getCell(2).getStringCellValue())
@@ -65,8 +65,7 @@ public class ExcelReader {
                             .setMainProfile(University.StudyProfile.valueOf(row.getCell(4).getStringCellValue()))
                             .createUniversity()
                     );
-                    universityList.add(university);
-                    System.out.println(university);
+
                 }
             }
         } catch (IOException e) {

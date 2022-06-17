@@ -1,7 +1,7 @@
-package ru.StudentsBase.comparators.students;
+package ru.studentsbase.comparators.students;
 
 import org.apache.commons.lang3.StringUtils;
-import ru.StudentsBase.model.Student;
+import ru.studentsbase.model.Student;
 
 public class AvgExScoreComparison implements StudentComparator {
 
@@ -17,7 +17,7 @@ public class AvgExScoreComparison implements StudentComparator {
 
     @Override
     public int compare(float o1, float o2) {
-        return -(Float.compare(o1, o2));
+        return Float.compare(o1, o2);
     }
 
     @Override

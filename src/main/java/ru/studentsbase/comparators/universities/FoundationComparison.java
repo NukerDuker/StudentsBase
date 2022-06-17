@@ -1,4 +1,4 @@
-package ru.StudentsBase.comparators.universities;
+package ru.studentsbase.comparators.universities;
 
 import org.apache.commons.lang3.StringUtils;
 

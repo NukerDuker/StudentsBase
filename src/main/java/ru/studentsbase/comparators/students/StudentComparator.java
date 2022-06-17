@@ -1,6 +1,6 @@
-package ru.StudentsBase.comparators.students;
+package ru.studentsbase.comparators.students;
 
-import ru.StudentsBase.model.Student;
+import ru.studentsbase.model.Student;
 
 import java.util.Comparator;
 

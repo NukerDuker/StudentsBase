@@ -1,4 +1,4 @@
-package ru.StudentsBase.model;
+package ru.studentsbase.model;
 
 public class Student {
 
