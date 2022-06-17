@@ -6,6 +6,8 @@ import ru.studentsbase.enums.UnivCompareEnum;
 import ru.studentsbase.model.Student;
 import ru.studentsbase.service.ExcelReader;
 import ru.studentsbase.model.University;
+import ru.studentsbase.util.JsonUtil;
+
 import java.util.List;
 
 public class Main {
@@ -25,5 +27,10 @@ public class Main {
                 .sorted(studentComparator)
                 .forEach(System.out::println);
 
+        String jsonS = JsonUtil.studentToJson(students.get(0));
+       String jsonU = JsonUtil.universityToJson(universities.get(0));
+
+        System.out.println(JsonUtil.studentFromJson(jsonS));
+        System.out.println(JsonUtil.universityFromJson(jsonU));
     }
 }
