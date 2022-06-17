@@ -6,7 +6,6 @@ import ru.studentsbase.enums.UnivCompareEnum;
 import ru.studentsbase.model.Student;
 import ru.studentsbase.service.ExcelReader;
 import ru.studentsbase.model.University;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,12 +33,5 @@ public class Main {
                 .sorted((x, y) -> (studname.compare(x.getAvgExamScore(), y.getAvgExamScore())))
                 .peek(System.out::println)
                 .collect(Collectors.toList());
-
-
-
-
-
-
-
     }
 }
