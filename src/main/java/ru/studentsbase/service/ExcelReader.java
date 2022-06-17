@@ -3,6 +3,7 @@ package ru.studentsbase.service;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Student;
 import ru.studentsbase.model.University;
 import java.io.File;
@@ -21,12 +22,14 @@ public class ExcelReader {
     private ExcelReader() {
     }
 
-    public static List<Student> readStudents() {
+    public static List<Student> readStudents(String filepath) {
         Student student;
-        try (FileInputStream fis = new FileInputStream(univInfoXlsx)) {
+
+        try (FileInputStream fis = new FileInputStream(new File(filepath))) {
             XSSFWorkbook workBook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workBook.getSheet("Студенты");
             Iterator<Row> rowIterator = sheet.iterator();
+
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 if (!((row.getCell(0).toString()).equals("id университета"))) {
@@ -47,12 +50,14 @@ public class ExcelReader {
         return studentList;
     }
 
-    public static List<University> readUniversities() {
+    public static List<University> readUniversities(String filepath) {
         University university;
-        try (FileInputStream fis = new FileInputStream(univInfoXlsx)) {
+        List<University> universityList = new ArrayList<>();
+        try (FileInputStream fis = new FileInputStream(new File(filepath))) {
             XSSFWorkbook workBook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workBook.getSheet("Университеты");
             Iterator<Row> rowIterator = sheet.iterator();
+
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 if (!((row.getCell(0).getStringCellValue()).equals("id университета"))) {
@@ -62,7 +67,7 @@ public class ExcelReader {
                             .setFullName(row.getCell(1).getStringCellValue())
                             .setShortName(row.getCell(2).getStringCellValue())
                             .setYearOfFoundation((int) row.getCell(3).getNumericCellValue())
-                            .setMainProfile(University.StudyProfile.valueOf(row.getCell(4).getStringCellValue()))
+                            .setMainProfile(StudyProfile.valueOf(row.getCell(4).getStringCellValue()))
                             .createUniversity()
                     );
 

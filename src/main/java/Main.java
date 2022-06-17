@@ -12,26 +12,20 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        //Компараторы университетов
-        UniversityComparator shortname = Controller.getComparator(UnivCompareEnum.SHORTNAMECOMPARISON);
-        UniversityComparator found = Controller.getComparator(UnivCompareEnum.FOUNDATIONCOMPARISON);
-        UniversityComparator fullName = Controller.getComparator(UnivCompareEnum.FULLNAMECOMPARISON);
-        UniversityComparator id = Controller.getComparator(UnivCompareEnum.IDCOMPARISON);
-        UniversityComparator mainprof = Controller.getComparator(UnivCompareEnum.MAINPROFILECOMPARISON);
-
-        //Компараторы студентов
-        StudentComparator studname = Controller.getComparator(StudCompareEnum.AVGEXSCORECOMPARISON);
 
         //Сортировка полученного списка университетов
-        List<University> lu = ExcelReader.readUniversities().stream()
-                .sorted((x, y) -> (shortname.compare(x.getShortName(), y.getShortName())))
-                .collect(Collectors.toList());
-
+        List<University> universities = ExcelReader.readUniversities("src/main/resources/universityInfo.xlsx");
+        UniversityComparator universityComparator = Controller.getComparator(UnivCompareEnum.FOUNDATIONCOMPARISON);
+        universities.stream()
+                .sorted(universityComparator)
+                .forEach(System.out::println);
 
         //Сортировка полученного списка студентов
-        List<Student> ls = ExcelReader.readStudents().stream()
-                .sorted((x, y) -> (studname.compare(x.getAvgExamScore(), y.getAvgExamScore())))
-                .peek(System.out::println)
-                .collect(Collectors.toList());
+        List<Student> students = ExcelReader.readStudents("src/main/resources/universityInfo.xlsx");
+        StudentComparator studentComparator = Controller.getComparator(StudCompareEnum.AVGEXSCORECOMPARISON);
+        students.stream()
+                .sorted(studentComparator)
+                .forEach(System.out::println);
+
     }
 }

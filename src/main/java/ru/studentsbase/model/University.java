@@ -1,27 +1,14 @@
 package ru.studentsbase.model;
 
+import ru.studentsbase.enums.StudyProfile;
+
 public class University {
 
     public University createUniversity() {
         return new UniversityBuilder().setId(id).setFullName(fullName).setShortName(shortName).setYearOfFoundation(yearOfFoundation).setMainProfile(mainProfile).createUniversity();
     }
 
-    //Добавляем Enum
-    public StudyProfile profileName;
 
-    public enum StudyProfile {
-
-        MEDICINE("медицина"),
-        PHYSICS("физика"),
-        LINGUISTICS("лингвистика"),
-        MATHEMATICS("математика");
-
-        StudyProfile(String profile) {
-            this.profileName = profile;
-        }
-
-        public String profileName;
-    }
 
     //Добавляем поля класса
     private String id, fullName, shortName;
@@ -58,8 +45,8 @@ public class University {
         return yearOfFoundation;
     }
 
-    public StudyProfile getMainProfile() {
-        return mainProfile;
+    public String getMainProfile() {
+        return mainProfile.getProfileName();
     }
 
     public University setId(String id) {
@@ -82,7 +69,7 @@ public class University {
         return this;
     }
 
-    public University setMainProfile(University.StudyProfile mainProfile) {
+    public University setMainProfile(StudyProfile mainProfile) {
         this.mainProfile = mainProfile;
         return this;
     }
@@ -103,7 +90,7 @@ public class University {
         private String fullName;
         private String shortName;
         private int yearOfFoundation;
-        private University.StudyProfile mainProfile;
+        private StudyProfile mainProfile;
 
         public UniversityBuilder setId(String id) {
             this.id = id;
@@ -125,7 +112,7 @@ public class University {
             return this;
         }
 
-        public UniversityBuilder setMainProfile(University.StudyProfile mainProfile) {
+        public UniversityBuilder setMainProfile(StudyProfile mainProfile) {
             this.mainProfile = mainProfile;
             return this;
         }
