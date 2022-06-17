@@ -1,4 +1,4 @@
-package ru.studentsbase.comparators;
+package ru.studentsbase.util;
 import ru.studentsbase.comparators.students.*;
 import ru.studentsbase.comparators.students.FullNameComparison;
 import ru.studentsbase.comparators.universities.*;

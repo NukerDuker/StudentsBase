@@ -1,4 +1,4 @@
-import ru.studentsbase.comparators.Controller;
+import ru.studentsbase.util.Controller;
 import ru.studentsbase.comparators.students.StudentComparator;
 import ru.studentsbase.comparators.universities.UniversityComparator;
 import ru.studentsbase.enums.StudCompareEnum;
@@ -7,8 +7,6 @@ import ru.studentsbase.model.Student;
 import ru.studentsbase.service.ExcelReader;
 import ru.studentsbase.model.University;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
