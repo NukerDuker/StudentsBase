@@ -1,10 +1,17 @@
 package ru.studentsbase.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Student {
 
     //Поля класса
-    private String fullName, universityId;
+    @SerializedName(value = "Student")
+    private String fullName;
+    @SerializedName(value = "University")
+    private String universityId;
+    @SerializedName(value = "Course")
     private int currentCourseNumber;
+    @SerializedName(value = "AverageScore")
     private float avgExamScore;
 
     //Конструкторы
