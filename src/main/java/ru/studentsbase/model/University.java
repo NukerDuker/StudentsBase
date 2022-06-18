@@ -1,18 +1,20 @@
 package ru.studentsbase.model;
 
+import com.google.gson.annotations.SerializedName;
 import ru.studentsbase.enums.StudyProfile;
 
 public class University {
 
-    public University createUniversity() {
-        return new UniversityBuilder().setId(id).setFullName(fullName).setShortName(shortName).setYearOfFoundation(yearOfFoundation).setMainProfile(mainProfile).createUniversity();
-    }
-
-
-
     //Добавляем поля класса
-    private String id, fullName, shortName;
+    @SerializedName(value = "UniversityId")
+    private String id;
+    @SerializedName(value = "UniversityName")
+    private String fullName;
+    @SerializedName(value = "UniversityShortName")
+    private String shortName;
+    @SerializedName(value = "YearOfFoundation")
     private int yearOfFoundation;
+    @SerializedName(value = "Profile")
     StudyProfile mainProfile;
 
     //Конструкторы
