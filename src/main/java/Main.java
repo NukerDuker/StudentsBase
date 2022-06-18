@@ -18,19 +18,22 @@ public class Main {
         UniversityComparator universityComparator = Controller.getComparator(UnivCompareEnum.FOUNDATIONCOMPARISON);
         universities.stream()
                 .sorted(universityComparator)
+                .map(JsonUtil::universityToJson)
+                .peek(System.out::println)
+                .map(JsonUtil::universityFromJson)
                 .forEach(System.out::println);
+        System.out.println("------------------------------------------");
 
         //Сортировка полученного списка студентов
         List<Student> students = ExcelReader.readStudents("src/main/resources/universityInfo.xlsx");
         StudentComparator studentComparator = Controller.getComparator(StudCompareEnum.AVGEXSCORECOMPARISON);
         students.stream()
                 .sorted(studentComparator)
+                .map(JsonUtil::studentToJson)
+                .peek(System.out::println)
+                .map(JsonUtil::studentFromJson)
                 .forEach(System.out::println);
+        System.out.println("------------------------------------------");
 
-        String jsonS = JsonUtil.studentToJson(students.get(0));
-       String jsonU = JsonUtil.universityToJson(universities.get(0));
-
-        System.out.println(JsonUtil.studentFromJson(jsonS));
-        System.out.println(JsonUtil.universityFromJson(jsonU));
     }
 }
