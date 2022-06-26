@@ -2,6 +2,8 @@ package ru.studentsbase.model;
 
 import ru.studentsbase.enums.StudyProfile;
 
+import java.util.List;
+
 public class Statistics {
 
     private StudyProfile mainProfile;
@@ -13,7 +15,7 @@ public class Statistics {
     public Statistics() {
     }
 
-    public String getMainProfile() {
+    public String  getMainProfile() {
         return mainProfile.getProfileName();
     }
 
@@ -56,5 +58,9 @@ public class Statistics {
     public Statistics setUniversityFullName(String universityFullName) {
         this.universityFullName = universityFullName;
         return this;
+    }
+
+    public List<Statistics> getStatistics(List<Student> students, List<University> universities) {
+
     }
 }

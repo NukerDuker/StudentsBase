@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.studentsbase.model.Statistics;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class XlsWriter {
     private static List<Object> stats = new ArrayList<>();
     private static final String[] HEADERS = {"mainProfile", "avgExemScore", "StudentQuantity", "universityQuantity", "universityFullName"};
 
-    public static List<Object> writeStats(List<Statistics> list, String filepath) {
+    public static boolean writeStats(List<Statistics> list, String filepath) {
 
         try{
             XSSFWorkbook workbook = new XSSFWorkbook(new File(filepath));
@@ -31,10 +32,14 @@ public class XlsWriter {
             XSSFRow row = sheet.createRow(0);
             fillHeaders(row);
             fillTableBody(sheet, list);
-
+            //Пишем таблицу в файл:
+            FileOutputStream fos = new FileOutputStream(new File(filepath));
+            workbook.write(fos);
+            return true;
 
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
