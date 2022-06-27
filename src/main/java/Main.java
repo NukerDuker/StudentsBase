@@ -1,3 +1,4 @@
+import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
 import ru.studentsbase.util.Controller;
 import ru.studentsbase.comparators.students.StudentComparator;
@@ -8,8 +9,11 @@ import ru.studentsbase.model.Student;
 import ru.studentsbase.service.ExcelReader;
 import ru.studentsbase.model.University;
 import ru.studentsbase.util.JsonUtil;
+import ru.studentsbase.util.StatsUtil;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,10 +41,11 @@ public class Main {
         System.out.println("------------------------------------------");
 
         //Статистика
-        List<Statistics> statistics = Statistics.getStatistics(students, universities);
-        statistics.stream()
-                .map(x -> x.getMainProfile())
-                .forEach(System.out::println);
-
+        List<Statistics> statistics = StatsUtil.getStatistics(students, universities);
+        Map<StudyProfile, String> map = statistics.stream()
+                .collect(Collectors.toMap(Statistics::getMainProfile,Statistics::getUniversitiesList));
+        for(Map.Entry<StudyProfile, String> entry:map.entrySet()) {
+            System.out.println("Profile: " + entry.getKey() + ", value: " + entry.getValue());
+        }
     }
 }

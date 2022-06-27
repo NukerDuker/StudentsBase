@@ -2,6 +2,7 @@ package ru.studentsbase.model;
 
 import ru.studentsbase.enums.StudyProfile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ public class Statistics {
     private float avgExamScore;
     private int studentQuantity;
     private int universityQuantity;
-    private String universityFullName;
+    private List<String> universityFullName = new ArrayList<>();
 
     public Statistics() {
     }
@@ -52,27 +53,14 @@ public class Statistics {
         return this;
     }
 
-    public String getUniversityFullName() {
-        return universityFullName;
+    public String getUniversitiesList() {
+        return universityFullName.toString();
     }
 
-    public Statistics setUniversityFullName(String universityFullName) {
-        this.universityFullName = universityFullName;
+    public Statistics addUniversityFullName(String universityFullName) {
+        this.universityFullName.add(universityFullName);
         return this;
     }
 
-    public static List<Statistics> getStatistics(List<Student> students, List<University> universities) {
-        /*
-        * Для каждого профиля, в котором есть хотя бы один университет, создать экземпляр класса Statistics.
-        * Заполнить все поля: пробежаться по стриму университетов функцией map, вытащить значения mainprofile
-        * Отфильтровать дубли
-        * Из оставшегося списка по каждому элементу создать класс Statistics */
 
-        List<Statistics> statisticsList = universities.stream()
-                .map(x -> x.getMainProfile())
-                .distinct()
-                .map(x -> new Statistics().setMainProfile(x))
-                .collect(Collectors.toList());
-        return statisticsList;
-    }
 }
