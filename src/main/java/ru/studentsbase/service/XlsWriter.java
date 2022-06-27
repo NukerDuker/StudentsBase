@@ -72,7 +72,7 @@ public class XlsWriter {
                 if (cellId == 1) cell.setCellValue(stat.getAvgExamScore());
                 if (cellId == 2) cell.setCellValue(stat.getStudentQuantity());
                 if (cellId == 3) cell.setCellValue(stat.getUniversityQuantity());
-                if (cellId == 4) cell.setCellValue(stat.getUniversitiesList());
+                if (cellId == 4) cell.setCellValue(stat.getUniversitiesList().toString());
             }
         }
 

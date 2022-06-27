@@ -17,13 +17,16 @@ public class StatsUtil {
                 .map(x -> new Statistics().setMainProfile(x))
                 .collect(Collectors.toList());
         //Шаг 2. Заполнить количество университетов по профилям
-        statisticsList.forEach(x -> {
-            universities.forEach(z -> {
+        int unisCount = 0;
+        statisticsList.stream().peek(x -> {
+            universities
+                    .forEach(z -> {
                         if (x.getMainProfile().name().equals(z.getMainProfile().name())) {
                             x.addUniversityFullName(z.getFullName());
                         }
                     });
-        });
+        })
+                .forEach(stat -> stat.setUniversityQuantity(stat.getUniversitiesList().size()));
 
         return statisticsList;
     }

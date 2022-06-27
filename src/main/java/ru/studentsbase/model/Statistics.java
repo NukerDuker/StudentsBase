@@ -53,8 +53,8 @@ public class Statistics {
         return this;
     }
 
-    public String getUniversitiesList() {
-        return universityFullName.toString();
+    public List<String> getUniversitiesList() {
+        return universityFullName;
     }
 
     public Statistics addUniversityFullName(String universityFullName) {
