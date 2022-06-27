@@ -68,7 +68,7 @@ public class XlsWriter {
             XSSFRow row = sheet.createRow(rowId++);
             for (int cellId = 0; cellId <= 4; cellId++) {
                 Cell cell = row.createCell(cellId);
-                if (cellId == 0) cell.setCellValue(stat.getMainProfile());
+                if (cellId == 0) cell.setCellValue(stat.getMainProfile().name());
                 if (cellId == 1) cell.setCellValue(stat.getAvgExamScore());
                 if (cellId == 2) cell.setCellValue(stat.getStudentQuantity());
                 if (cellId == 3) cell.setCellValue(stat.getUniversityQuantity());

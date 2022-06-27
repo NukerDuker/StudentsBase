@@ -3,6 +3,7 @@ package ru.studentsbase.model;
 import ru.studentsbase.enums.StudyProfile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Statistics {
 
@@ -15,8 +16,8 @@ public class Statistics {
     public Statistics() {
     }
 
-    public String  getMainProfile() {
-        return mainProfile.getProfileName();
+    public StudyProfile  getMainProfile() {
+        return mainProfile;
     }
 
     public Statistics setMainProfile(StudyProfile mainProfile) {
@@ -60,7 +61,18 @@ public class Statistics {
         return this;
     }
 
-    public List<Statistics> getStatistics(List<Student> students, List<University> universities) {
+    public static List<Statistics> getStatistics(List<Student> students, List<University> universities) {
+        /*
+        * Для каждого профиля, в котором есть хотя бы один университет, создать экземпляр класса Statistics.
+        * Заполнить все поля: пробежаться по стриму университетов функцией map, вытащить значения mainprofile
+        * Отфильтровать дубли
+        * Из оставшегося списка по каждому элементу создать класс Statistics */
 
+        List<Statistics> statisticsList = universities.stream()
+                .map(x -> x.getMainProfile())
+                .distinct()
+                .map(x -> new Statistics().setMainProfile(x))
+                .collect(Collectors.toList());
+        return statisticsList;
     }
 }

@@ -1,3 +1,4 @@
+import ru.studentsbase.model.Statistics;
 import ru.studentsbase.util.Controller;
 import ru.studentsbase.comparators.students.StudentComparator;
 import ru.studentsbase.comparators.universities.UniversityComparator;
@@ -34,6 +35,12 @@ public class Main {
                 .map(JsonUtil::studentFromJson)
                 .forEach(System.out::println);
         System.out.println("------------------------------------------");
+
+        //Статистика
+        List<Statistics> statistics = Statistics.getStatistics(students, universities);
+        statistics.stream()
+                .map(x -> x.getMainProfile())
+                .forEach(System.out::println);
 
     }
 }
