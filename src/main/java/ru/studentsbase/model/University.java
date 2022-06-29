@@ -47,8 +47,8 @@ public class University {
         return yearOfFoundation;
     }
 
-    public String getMainProfile() {
-        return mainProfile.getProfileName();
+    public StudyProfile getMainProfile() {
+        return mainProfile;
     }
 
     public University setId(String id) {
