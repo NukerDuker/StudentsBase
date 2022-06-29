@@ -69,8 +69,8 @@ public class XlsWriter {
             for (int cellId = 0; cellId <= 4; cellId++) {
                 Cell cell = row.createCell(cellId);
                 if (cellId == 0) cell.setCellValue(stat.getMainProfile().name());
-                if (cellId == 1) cell.setCellValue(stat.getAvgExamScore());
-                if (cellId == 2) cell.setCellValue(stat.getStudentQuantity());
+                if (cellId == 1) cell.setCellValue(stat.getAvgExamScore().get());
+                if (cellId == 2) cell.setCellValue(stat.getStudentQuantity().get());
                 if (cellId == 3) cell.setCellValue(stat.getUniversityQuantity());
                 if (cellId == 4) cell.setCellValue(stat.getUniversitiesList().toString());
             }

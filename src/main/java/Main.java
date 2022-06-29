@@ -42,10 +42,6 @@ public class Main {
 
         //Статистика
         List<Statistics> statistics = StatsUtil.getStatistics(students, universities);
-        Map<StudyProfile, Integer> map = statistics.stream()
-                .collect(Collectors.toMap(Statistics::getMainProfile,x -> x.getUniversityQuantity()));
-        for(Map.Entry<StudyProfile, Integer> entry:map.entrySet()) {
-            System.out.println("Profile: " + entry.getKey() + ", value: " + entry.getValue());
-        }
+        statistics.forEach(System.out::println);
     }
 }
