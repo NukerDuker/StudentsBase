@@ -1,5 +1,6 @@
 package ru.studentsbase.service;
 
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -17,6 +18,7 @@ import java.util.List;
 public class XlsWriter {
     private static CellStyle headerStyle;
     private static CellStyle bodyStyle;
+    private static CellStyle dataFormat;
     private static List<Object> stats = new ArrayList<>();
     private static final String[] HEADERS = {"Основной профиль", "Средний балл", "Количество студентов", "Количество университетов", "Название университета"};
 
@@ -25,8 +27,14 @@ public class XlsWriter {
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
             //Устанавливаем стили заголовковка
-            setHeaderCellStyle(workbook);
-            setBodyStyle(workbook);
+            headerStyle = workbook.createCellStyle();
+            bodyStyle = workbook.createCellStyle();
+            dataFormat = workbook.createCellStyle();
+            setBorders(workbook, headerStyle, bodyStyle, dataFormat);
+            setFont(workbook, "Calibri", true, headerStyle);
+            setFont(workbook, "Calibri", false, bodyStyle, dataFormat);
+            //Отдельный стиль для средних баллов, чтобы было два знака после запятой
+            setDataCellFormat(workbook, dataFormat);
             //Создаем страницу
             XSSFSheet sheet = workbook.createSheet("Статистика");
             //Устанавливаем заголовки столбцов
@@ -45,27 +53,29 @@ public class XlsWriter {
         }
     }
 
-    private static void setHeaderCellStyle(XSSFWorkbook workbook) {
-        headerStyle = workbook.createCellStyle();
-        headerStyle.setBorderBottom(BorderStyle.THIN);
-        headerStyle.setBorderLeft(BorderStyle.THIN);
-        headerStyle.setBorderRight(BorderStyle.THIN);
-        headerStyle.setBorderTop(BorderStyle.THIN);
-        Font font = workbook.createFont();
-        font.setFontName("Calibri");
-        font.setBold(true);
-        headerStyle.setFont(font);
+    private static void setBorders(XSSFWorkbook workbook, CellStyle... styles) {
+        for (CellStyle style : styles) {
+            style.setBorderBottom(BorderStyle.THIN);
+            style.setBorderLeft(BorderStyle.THIN);
+            style.setBorderRight(BorderStyle.THIN);
+            style.setBorderTop(BorderStyle.THIN);
+        }
     }
 
-    private static void setBodyStyle(XSSFWorkbook workbook) {
-        bodyStyle = workbook.createCellStyle();
-        bodyStyle.setBorderBottom(BorderStyle.THIN);
-        bodyStyle.setBorderLeft(BorderStyle.THIN);
-        bodyStyle.setBorderRight(BorderStyle.THIN);
-        bodyStyle.setBorderTop(BorderStyle.THIN);
-        Font font = workbook.createFont();
-        font.setFontName("Calibri");
-        bodyStyle.setFont(font);
+    private static void setFont(XSSFWorkbook workbook, String font, boolean bold, CellStyle... styles) {
+        for (CellStyle style : styles) {
+            Font f = workbook.createFont();
+            f.setFontName(font);
+            if (bold) f.setBold(true);
+            style.setFont(f);
+        }
+    }
+
+
+    private static void setDataCellFormat(XSSFWorkbook workbook, CellStyle... styles) {
+        for (CellStyle style : styles) {
+            style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00"));
+        }
     }
 
     private static void fillHeaders(XSSFRow row) {
@@ -84,11 +94,16 @@ public class XlsWriter {
             for (int cellId = 0; cellId <= 4; cellId++) {
                 Cell cell = row.createCell(cellId);
                 if (cellId == 0) cell.setCellValue(stat.getMainProfile().name());
-                if (cellId == 1) cell.setCellValue(stat.getAvgExamScore().get());
+                if (cellId == 1) {
+                    cell.setCellValue(stat.getAvgExamScore().get());
+                    //Второму столбцу присваеваем свой стиль
+                    cell.setCellStyle(dataFormat);
+                }
                 if (cellId == 2) cell.setCellValue(stat.getStudentQuantity().get());
                 if (cellId == 3) cell.setCellValue(stat.getUniversityQuantity());
                 if (cellId == 4) cell.setCellValue(stat.getUniversitiesList().toString());
-                cell.setCellStyle(bodyStyle);
+                //Всем, кроме второго столбца, ставим стиль
+                if (cellId != 1) cell.setCellStyle(bodyStyle);
             }
         }
 
