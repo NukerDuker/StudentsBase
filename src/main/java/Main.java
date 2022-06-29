@@ -1,5 +1,6 @@
 import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
+import ru.studentsbase.service.XlsWriter;
 import ru.studentsbase.util.Controller;
 import ru.studentsbase.comparators.students.StudentComparator;
 import ru.studentsbase.comparators.universities.UniversityComparator;
@@ -42,6 +43,10 @@ public class Main {
 
         //Статистика
         List<Statistics> statistics = StatsUtil.getStatistics(students, universities);
-        statistics.forEach(System.out::println);
+        XlsWriter.writeStats(statistics, "src/main/resources/statistics.xlsx");
+        statistics.stream()
+                .map(x -> x.getAvgExamScore().get())
+                .forEach(System.out::println);
+
     }
 }

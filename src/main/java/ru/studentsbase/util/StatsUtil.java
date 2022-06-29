@@ -45,6 +45,7 @@ public class StatsUtil {
     }
 
     private static float getAverageScore(List<Float> avgScoreList, Statistics stat) {
+        float average = 0;
         //Если студентов нет, возвращаем Optional.empty();
         if (avgScoreList.size() == 0) stat.setAvgExamScore(0);
         //В остальных случаях считаем средний бал:
@@ -53,10 +54,9 @@ public class StatsUtil {
             for (Float score : avgScoreList) {
                 sum += score;
             }
-            float average = sum / avgScoreList.size();
-            BigDecimal bd = new BigDecimal(average).setScale(2, RoundingMode.HALF_EVEN);
-            return bd.floatValue();
+            average = sum / avgScoreList.size();
         }
-        return 0;
+        BigDecimal bd = new BigDecimal(average).setScale(2, RoundingMode.HALF_EVEN);
+        return bd.floatValue();
     }
 }
