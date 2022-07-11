@@ -1,5 +1,7 @@
 package ru.studentsbase.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,14 +20,16 @@ public class ExcelReader {
     private static final List<University> universityList = new ArrayList<>();
     private static final List<Student> studentList = new ArrayList<>();
     private static final File univInfoXlsx = new File("src/main/resources/universityInfo.xlsx");
+    private static Logger logger = LogManager.getLogger(ExcelReader.class.getName());
 
     private ExcelReader() {
     }
 
     public static List<Student> readStudents(String filepath) {
+        logger.info("Ищем файл со студентами");
         Student student;
-
         try (FileInputStream fis = new FileInputStream(new File(filepath))) {
+            logger.info("Читаем файл со студентами");
             XSSFWorkbook workBook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workBook.getSheet("Студенты");
             Iterator<Row> rowIterator = sheet.iterator();
@@ -44,16 +48,17 @@ public class ExcelReader {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Файла нет");
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return studentList;
     }
 
     public static List<University> readUniversities(String filepath) {
+        logger.info("Ищем файл с университетами");
         University university;
         List<University> universityList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(new File(filepath))) {
+            logger.info("Читаем файл с университетами");
             XSSFWorkbook workBook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workBook.getSheet("Университеты");
             Iterator<Row> rowIterator = sheet.iterator();
@@ -70,12 +75,10 @@ public class ExcelReader {
                             .setMainProfile(StudyProfile.valueOf(row.getCell(4).getStringCellValue()))
                             .createUniversity()
                     );
-
                 }
             }
         } catch (IOException e) {
-            System.out.println("Файла нет");
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return universityList;
     }

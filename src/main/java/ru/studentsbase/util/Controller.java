@@ -1,4 +1,6 @@
 package ru.studentsbase.util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.studentsbase.comparators.students.*;
 import ru.studentsbase.comparators.students.FullNameComparison;
 import ru.studentsbase.comparators.universities.*;
@@ -8,9 +10,12 @@ import ru.studentsbase.enums.UnivCompareEnum;
 
 public class Controller {
 
+    private static Logger logger = LogManager.getLogger(Controller.class.getName());
+
     private Controller() {}
 
     public static StudentComparator getComparator(StudCompareEnum compareEnum) {
+        logger.info("Выбираем компаратор студентов");
         switch (compareEnum) {
             case AVGEXSCORECOMPARISON:
                 return new AvgExScoreComparison();
@@ -21,7 +26,7 @@ public class Controller {
             case UNIVIDCOMPARISON:
                 return new UnivIdComparison();
             default:
-                System.out.println("Не найдена функция для сравнения. Выбери одну из:\nAVGEXSCORECOMPARISON,\n" +
+                logger.warn("Не найдена функция для сравнения. Выбери одну из:\nAVGEXSCORECOMPARISON,\n" +
                         "    CURSENUMCOMPARISON,\n" +
                         "    FULLNAMECOMPARISON,\n" +
                         "    UNIVIDCOMPARISON;");
@@ -30,6 +35,7 @@ public class Controller {
     }
 
     public static UniversityComparator getComparator(UnivCompareEnum compareEnum) {
+        logger.info("Выбираем компаратор университетов");
         switch (compareEnum) {
             case FOUNDATIONCOMPARISON:
                 return new FoundationComparison();
@@ -42,7 +48,7 @@ public class Controller {
             case SHORTNAMECOMPARISON:
                 return new ShortNameComparison();
             default:
-                System.out.println("Не найдена функция для сравнения. Выбери одну из:\nFOUNDATIONCOMPARISON,\n" +
+                logger.warn("Не найдена функция для сравнения. Выбери одну из:\nFOUNDATIONCOMPARISON,\n" +
                         "    FULLNAMECOMPARISON,\n" +
                         "    IDCOMPARISON,\n" +
                         "    MAINPROFILECOMPARISON,\n" +

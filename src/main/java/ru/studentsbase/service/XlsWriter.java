@@ -1,5 +1,7 @@
 package ru.studentsbase.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -21,10 +23,12 @@ public class XlsWriter {
     private static CellStyle dataFormat;
     private static List<Object> stats = new ArrayList<>();
     private static final String[] HEADERS = {"Основной профиль", "Средний балл", "Количество студентов", "Количество университетов", "Название университета"};
+    private static Logger logger = LogManager.getLogger(XlsWriter.class.getName());
 
     public static boolean writeStats(List<Statistics> list, String filepath) {
-
+        logger.info("Пишем статистику");
         try {
+            logger.info("Создаем книгу для записи");
             XSSFWorkbook workbook = new XSSFWorkbook();
             //Устанавливаем стили заголовковка
             headerStyle = workbook.createCellStyle();
@@ -48,12 +52,13 @@ public class XlsWriter {
             return true;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return false;
         }
     }
 
     private static void setBorders(XSSFWorkbook workbook, CellStyle... styles) {
+        logger.info("Заполняем рамки таблицы");
         for (CellStyle style : styles) {
             style.setBorderBottom(BorderStyle.THIN);
             style.setBorderLeft(BorderStyle.THIN);
@@ -63,6 +68,8 @@ public class XlsWriter {
     }
 
     private static void setFont(XSSFWorkbook workbook, String font, boolean bold, CellStyle... styles) {
+        logger.info("Устанавливаем шрифт таблицы");
+
         for (CellStyle style : styles) {
             Font f = workbook.createFont();
             f.setFontName(font);
@@ -73,12 +80,15 @@ public class XlsWriter {
 
 
     private static void setDataCellFormat(XSSFWorkbook workbook, CellStyle... styles) {
+        logger.info("Заполняем форматы клеток таблицы");
+
         for (CellStyle style : styles) {
             style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00"));
         }
     }
 
     private static void fillHeaders(XSSFRow row) {
+        logger.info("Заполняем заголовки таблицы");
         int cellId = 0;
         for (String header : HEADERS) {
             Cell cell = row.createCell(cellId++);
@@ -88,6 +98,7 @@ public class XlsWriter {
     }
 
     private static void fillTableBody(XSSFSheet sheet, List<Statistics> list) {
+        logger.info("Заполняем тело таблицы");
         int rowId = 1;
         for (Statistics stat : list) {
             XSSFRow row = sheet.createRow(rowId++);

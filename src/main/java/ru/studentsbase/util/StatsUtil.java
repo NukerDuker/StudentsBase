@@ -1,5 +1,8 @@
 package ru.studentsbase.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
 import ru.studentsbase.model.Student;
 import ru.studentsbase.model.University;
@@ -12,14 +15,18 @@ import java.util.stream.Collectors;
 
 public class StatsUtil {
 
+    private static Logger logger = LogManager.getLogger(StatsUtil.class.getName());
+
     public static List<Statistics> getStatistics(List<Student> students, List<University> universities) {
         //Шаг 1. Получить список всех профилей, которые хоть раз упоминаются в файле
+        logger.info("Получаем список всех профилей, которые есть в файле");
         List<Statistics> statisticsList = universities.stream()
                 .map(x -> x.getMainProfile())
                 .distinct()
                 .map(x -> new Statistics().setMainProfile(x))
                 .collect(Collectors.toList());
         //Шаг 2. Заполнить количество университетов по профилям
+        logger.info("Заполняем количество университетов по профилю");
         int unisCount = 0;
         statisticsList.stream().peek(statistics -> {
                     universities.forEach(university -> {
@@ -45,6 +52,7 @@ public class StatsUtil {
     }
 
     private static float getAverageScore(List<Float> avgScoreList, Statistics stat) {
+        logger.info("Считаем средний балл по профилю " + stat.getMainProfile().toString());
         float average = 0;
         //Если студентов нет, возвращаем Optional.empty();
         if (avgScoreList.size() == 0) stat.setAvgExamScore(0);
