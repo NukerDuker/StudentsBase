@@ -2,7 +2,6 @@ package ru.studentsbase.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
 import ru.studentsbase.model.Student;
 import ru.studentsbase.model.University;
@@ -39,12 +38,14 @@ public class StatsUtil {
                     students.forEach(student -> {
                         for (String id : statistics.getUniversitiesIdList()) {
                             if (id.equals(student.getUniversityId())) {
-                                avgScoreList.add(student.getAvgExamScore());
+                                avgScoreList.add(student.getAvgScore());
                             }
                         }
                     });
                     statistics.setStudentQuantity(avgScoreList.size());
                     statistics.setAvgExamScore(getAverageScore(avgScoreList, statistics));
+                    logger.info("Средний балл " + statistics.getAvgExamScore());
+
                 })
                 .forEach(stat -> stat.setUniversityQuantity(stat.getUniversitiesList().size()));
 
