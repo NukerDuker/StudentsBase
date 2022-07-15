@@ -3,19 +3,29 @@ package ru.studentsbase.model;
 import com.google.gson.annotations.SerializedName;
 import ru.studentsbase.enums.StudyProfile;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = {"id","fullName", "mainProfile"})
 public class University {
 
     //Добавляем поля класса
     @SerializedName(value = "UniversityId")
+    @XmlElement(name = "universityId")
     private String id;
+
     @SerializedName(value = "UniversityName")
     private String fullName;
+
     @SerializedName(value = "UniversityShortName")
     private String shortName;
+
     @SerializedName(value = "YearOfFoundation")
     private int yearOfFoundation;
+
     @SerializedName(value = "Profile")
-    StudyProfile mainProfile;
+    @XmlElement(name = "universityProfile")
+    private StudyProfile mainProfile;
 
     //Конструкторы
 
@@ -35,6 +45,7 @@ public class University {
         return id;
     }
 
+    @XmlElement(name = "universityName")
     public String getFullName() {
         return fullName;
     }

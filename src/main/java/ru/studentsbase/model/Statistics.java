@@ -2,23 +2,42 @@ package ru.studentsbase.model;
 
 import ru.studentsbase.enums.StudyProfile;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = {"mainProfile", "score"})
 public class Statistics {
 
-    private StudyProfile mainProfile;
-    private Optional<Float> avgExamScore;
-    private Optional<Integer> studentQuantity;
-    private int universityQuantity;
-    private List<String> universitiesFullNameList = new ArrayList<>();
-    private List<String> universitiesIdList = new ArrayList<>();
 
+    private StudyProfile mainProfile;
+
+
+    private Optional<Float> avgExamScore;
+
+    private float score;
+    private Optional<Integer> studentQuantity;
+
+    private int universityQuantity;
+
+    private List<String> universitiesFullNameList = new ArrayList<>();
+
+    private List<String> universitiesIdList = new ArrayList<>();
     public Statistics() {
     }
 
-    public StudyProfile  getMainProfile() {
+    @XmlElement(name = "avgScore")
+    public float getScore() {
+        return score;
+    }
+
+    @XmlElement(name = "universityProfile")
+    public StudyProfile getMainProfile() {
         return mainProfile;
     }
 
@@ -31,7 +50,9 @@ public class Statistics {
         return avgExamScore;
     }
 
+
     public Optional<Float> setAvgExamScore(float avgExamScore) {
+        score = avgExamScore;
         return this.avgExamScore = Optional.ofNullable(avgExamScore);
     }
 

@@ -2,17 +2,26 @@ package ru.studentsbase.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
 
     //Поля класса
     @SerializedName(value = "Student")
+    @XmlElement(name = "studentName")
     private String fullName;
+
     @SerializedName(value = "University")
+    @XmlElement(name = "universityId")
     private String universityId;
+
+    @XmlTransient
     @SerializedName(value = "Course")
     private int currentCourseNumber;
+
     @SerializedName(value = "AverageScore")
-    private float avgExamScore;
+    private float avgScore;
 
     //Конструкторы
 
@@ -24,7 +33,7 @@ public class Student {
         this.fullName = fullName;
         this.universityId = universityId;
         this.currentCourseNumber = currentCourseNumber;
-        this.avgExamScore = avgExamScore;
+        this.avgScore = avgExamScore;
     }
 
     //Геттеры и сеттеры
@@ -40,8 +49,8 @@ public class Student {
         return currentCourseNumber;
     }
 
-    public float getAvgExamScore() {
-        return avgExamScore;
+    public float getAvgScore() {
+        return avgScore;
     }
 
     public void setFullName(String fullName) {
@@ -56,8 +65,8 @@ public class Student {
         this.currentCourseNumber = currentCourseNumber;
     }
 
-    public void setAvgExamScore(float avgExamScore) {
-        this.avgExamScore = avgExamScore;
+    public void setAvgScore(float avgScore) {
+        this.avgScore = avgScore;
     }
 
     @Override
@@ -66,7 +75,7 @@ public class Student {
                 "fullName='" + fullName + '\'' +
                 ", universityId='" + universityId + '\'' +
                 ", currentCourseNumber=" + currentCourseNumber +
-                ", avgExamScore=" + avgExamScore +
+                ", avgExamScore=" + avgScore +
                 '}';
     }
 
