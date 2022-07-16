@@ -6,12 +6,14 @@ import org.eclipse.persistence.jaxb.MarshallerProperties;
 import org.eclipse.persistence.jaxb.xmlmodel.ObjectFactory;
 import org.eclipse.persistence.oxm.MediaType;
 import ru.studentsbase.model.XmlModel;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
 public class JsonWriter {

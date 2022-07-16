@@ -20,6 +20,7 @@ import ru.studentsbase.util.StatsUtil;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,15 +53,15 @@ public class Main {
         //Статистика
         List<Statistics> statistics = StatsUtil.getStatistics(students, universities);
         //XlsWriter.writeStats(statistics, "src/main/resources/statistics.xlsx");
-        statistics.stream()
-                .map(x -> x.getAvgExamScore().get())
-                .collect(Collectors.toList());
 
-        XmlModel model = new XmlModel();
-        model.setStatistics(statistics);
-        model.setUniversities(universities);
-        model.setStudents(students);
-        logger.info("Подготовили данные для xml");
+        XmlModel model = XmlModel.builder()
+                .students(students)
+                .universities(universities)
+                .statistics(statistics)
+                .build();
+
+        logger.info("Подготовили данные для xml и JSON");
+        XmlWriter.marshal(model);
         JsonWriter.marshal(model);
     }
 }

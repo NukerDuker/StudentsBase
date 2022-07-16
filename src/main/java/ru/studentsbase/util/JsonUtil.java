@@ -13,7 +13,8 @@ public class JsonUtil {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    private JsonUtil() {}
+    private JsonUtil() {
+    }
 
     public static String studentToJson(Student student) {
         return gson.toJson(student);
@@ -40,12 +41,14 @@ public class JsonUtil {
     }
 
     public static List<Student> studentListFromJson(String json) {
-        Type collectionType = new TypeToken<List<Student>>(){}.getType();
+        Type collectionType = new TypeToken<List<Student>>() {
+        }.getType();
         return gson.fromJson(json, collectionType);
     }
 
     public static List<University> universitiesListFromJson(String json) {
-        Type collectionType = new TypeToken<List<University>>(){}.getType();
+        Type collectionType = new TypeToken<List<University>>() {
+        }.getType();
         return gson.fromJson(json, collectionType);
     }
 }

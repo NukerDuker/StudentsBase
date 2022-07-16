@@ -1,9 +1,8 @@
 package ru.studentsbase.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.xml.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @XmlRootElement(name = "root")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class XmlModel {
@@ -28,8 +28,10 @@ public class XmlModel {
     @XmlElement(name = "statisticsEntry")
     private List<Statistics> statistics;
 
+
     @XmlElement(name = "processedAt")
     private String date;
+
 
     public XmlModel() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
@@ -38,4 +40,10 @@ public class XmlModel {
     }
 
 
+    public XmlModel(List<Student> students, List<University> universities, List<Statistics> statistics) {
+        this();
+        this.students = students;
+        this.universities = universities;
+        this.statistics = statistics;
+    }
 }
