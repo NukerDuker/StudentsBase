@@ -16,15 +16,10 @@ public class Statistics {
 
 
     private StudyProfile mainProfile;
-
-
     private Optional<Float> avgExamScore;
-
     private float score;
     private Optional<Integer> studentQuantity;
-
     private int universityQuantity;
-
     private List<String> universitiesFullNameList = new ArrayList<>();
 
     private List<String> universitiesIdList = new ArrayList<>();

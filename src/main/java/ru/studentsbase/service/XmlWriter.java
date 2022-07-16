@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class XmlWriter {
+
     private static final Logger logger = LogManager.getLogger(XmlWriter.class.getName());
     private static Marshaller mar;
     private static DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -21,23 +22,20 @@ public class XmlWriter {
 
     public static void marshal(XmlModel model) {
         try {
-            logger.info("Пишем xml");
+            logger.info("Подготовка для записи xml");
             JAXBContext context = JAXBContext.newInstance(model.getClass());
             mar = context.createMarshaller();
             mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             logger.info("Создаем файл");
-            String path = "src/main/resources/ " + formatter.format(System.currentTimeMillis()) + ".xml";
+            File directory = new File("src/main/xmlDocs");
+            logger.info("Создаем директорию: " + directory.mkdir());
+            String path =  ("src/main/xmlDocs/" + formatter.format(System.currentTimeMillis()) + ".xml");
             File file = new File(path);
-            logger.info("Файл создан?");
-            logger.info(Boolean.toString(file.createNewFile()));
+            logger.info("Файл создан: " + file.createNewFile());
             mar.marshal(model, file);
         } catch (IOException | JAXBException e) {
             logger.error(e.getMessage());
             Arrays.stream(e.getStackTrace()).forEach(logger::error);
         }
-    }
-
-    public static void writeXml() {
-
     }
 }
