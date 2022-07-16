@@ -2,12 +2,13 @@ package ru.studentsbase.model;
 
 import com.google.gson.annotations.SerializedName;
 import ru.studentsbase.enums.StudyProfile;
+import ru.studentsbase.util.Jsonable;
 
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"id","fullName", "mainProfile"})
-public class University {
+public class University implements Jsonable {
 
     //Добавляем поля класса
     @SerializedName(value = "UniversityId")

@@ -1,11 +1,12 @@
 package ru.studentsbase.model;
 
 import com.google.gson.annotations.SerializedName;
+import ru.studentsbase.util.Jsonable;
 
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Student {
+public class Student implements Jsonable {
 
     //Поля класса
     @SerializedName(value = "Student")
