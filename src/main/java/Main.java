@@ -3,6 +3,7 @@ import org.apache.logging.log4j.Logger;
 import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
 import ru.studentsbase.model.XmlModel;
+import ru.studentsbase.service.JsonWriter;
 import ru.studentsbase.service.XlsWriter;
 import ru.studentsbase.service.XmlWriter;
 import ru.studentsbase.util.Controller;
@@ -60,6 +61,6 @@ public class Main {
         model.setUniversities(universities);
         model.setStudents(students);
         logger.info("Подготовили данные для xml");
-        XmlWriter.marshal(model);
+        JsonWriter.marshal(model);
     }
 }

@@ -18,20 +18,25 @@ public class XmlWriter {
     private static final Logger logger = LogManager.getLogger(XmlWriter.class.getName());
     private static Marshaller mar;
     private static DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT);
-    private static List objects;
 
     public static void marshal(XmlModel model) {
         try {
             logger.info("Подготовка для записи xml");
             JAXBContext context = JAXBContext.newInstance(model.getClass());
+
+            //Set type
             mar = context.createMarshaller();
             mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            logger.info("Создаем файл");
+
+            //Create dir
             File directory = new File("src/main/xmlDocs");
             logger.info("Создаем директорию: " + directory.mkdir());
-            String path =  ("src/main/xmlDocs/" + formatter.format(System.currentTimeMillis()) + ".xml");
-            File file = new File(path);
+
+            //Create file
+            File file = new File("src/main/xmlDocs/" + formatter.format(System.currentTimeMillis()) + ".xml");
             logger.info("Файл создан: " + file.createNewFile());
+
+            //Write to file
             mar.marshal(model, file);
         } catch (IOException | JAXBException e) {
             logger.error(e.getMessage());

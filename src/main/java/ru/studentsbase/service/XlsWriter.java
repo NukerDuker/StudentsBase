@@ -21,7 +21,6 @@ public class XlsWriter {
     private static CellStyle headerStyle;
     private static CellStyle bodyStyle;
     private static CellStyle dataFormat;
-    private static List<Object> stats = new ArrayList<>();
     private static final String[] HEADERS = {"Основной профиль", "Средний балл", "Количество студентов", "Количество университетов", "Название университета"};
     private static Logger logger = LogManager.getLogger(XlsWriter.class.getName());
 
