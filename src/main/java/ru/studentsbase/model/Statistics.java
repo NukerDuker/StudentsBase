@@ -1,6 +1,7 @@
 package ru.studentsbase.model;
 
 import ru.studentsbase.enums.StudyProfile;
+import ru.studentsbase.util.Jsonable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(propOrder = {"mainProfile", "score"})
-public class Statistics {
+public class Statistics implements Jsonable{
 
 
     private StudyProfile mainProfile;

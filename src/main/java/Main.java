@@ -1,10 +1,8 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.studentsbase.enums.StudyProfile;
 import ru.studentsbase.model.Statistics;
 import ru.studentsbase.model.XmlModel;
 import ru.studentsbase.service.JsonWriter;
-import ru.studentsbase.service.XlsWriter;
 import ru.studentsbase.service.XmlWriter;
 import ru.studentsbase.util.Controller;
 import ru.studentsbase.comparators.students.StudentComparator;
@@ -16,13 +14,7 @@ import ru.studentsbase.service.ExcelReader;
 import ru.studentsbase.model.University;
 import ru.studentsbase.util.JsonUtil;
 import ru.studentsbase.util.StatsUtil;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -41,6 +33,7 @@ public class Main {
         UniversityComparator universityComparator = Controller.getComparator(UnivCompareEnum.FOUNDATIONCOMPARISON);
         universities.stream()
                 .sorted(universityComparator)
+                .map(JsonUtil::toJson)
                 .collect(Collectors.toList());
 
         //Сортировка полученного списка студентов
@@ -48,6 +41,7 @@ public class Main {
         StudentComparator studentComparator = Controller.getComparator(StudCompareEnum.AVGEXSCORECOMPARISON);
         students.stream()
                 .sorted(studentComparator)
+                .map(JsonUtil::toJson)
                 .collect(Collectors.toList());
 
         //Статистика
@@ -60,8 +54,10 @@ public class Main {
                 .statistics(statistics)
                 .build();
 
-        logger.info("Подготовили данные для xml и JSON");
+        /*logger.info("Подготовили данные для xml и JSON");
         XmlWriter.marshal(model);
-        JsonWriter.marshal(model);
+        JsonWriter.marshal(model);*/
+
+        System.out.println(JsonUtil.listToJson(universities));;
     }
 }

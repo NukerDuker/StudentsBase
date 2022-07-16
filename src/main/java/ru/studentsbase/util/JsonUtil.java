@@ -16,15 +16,12 @@ public class JsonUtil {
     private JsonUtil() {
     }
 
-    public static String studentToJson(Student student) {
-        return gson.toJson(student);
+    public static String toJson(Jsonable object) {
+        return gson.toJson(object);
     }
 
-    public static String universityToJson(University university) {
-        return gson.toJson(university);
-    }
 
-    public static String studentListToJson(List<Student> studentList) {
+    public static String listToJson(List<? extends Jsonable> studentList) {
         return gson.toJson(studentList);
     }
 

@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Builder
 @XmlRootElement(name = "root")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class XmlModel {
@@ -39,7 +38,7 @@ public class XmlModel {
         date = format.format(now);
     }
 
-
+    @Builder
     public XmlModel(List<Student> students, List<University> universities, List<Statistics> statistics) {
         this();
         this.students = students;
